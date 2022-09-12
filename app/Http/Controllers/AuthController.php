@@ -62,6 +62,50 @@ class AuthController extends Controller
       }
       return redirect("login")->withSuccess('Opps! You do not have access');
     }
+    public function adminDashboard()
+    {
+      if(Auth::check())
+      {
+        return view('admindashboard'); 
+      }
+      return redirect("login")->withSuccess('Opps! You do not have access');
+    }
+    public function userDashboard()
+    {
+      
+      if(Auth::check())
+      {
+        return view('userdashboard'); 
+      }
+      return redirect("login")->withSuccess('Opps! You do not have access');
+    }
+    public function forgetPassword()
+    {
+      return view('forgetPassword');
+    }
+    public function forgetPasswordPost(Request $request)
+    {
+      $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|min:3',
+        'confirmpassword' => 'required|min:3',
+        ]);
+      $email = $request->get('email');
+      $user = User::where('email',$email)->first();
+      //dd($user);
+     if($request->password===$request->confirmpassword){
+        //dd($request->password);
+        $success=User::where('email', $request->email)
+                        ->update(['password' => Hash::make($request->password)]);
+        if($success){
+          return redirect('login');
+        }
+        else{
+          return back();
+        }
+     }
+      
+    }
     public function logout() {
         session()->flush();
         Auth::logout();

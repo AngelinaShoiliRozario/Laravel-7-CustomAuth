@@ -41,12 +41,16 @@
             padding:.3em 1em;
             background-color: dodgerblue
         }
+        p{
+            color:red;
+            text-align: center;
+        }
        </style>
     </head>
     <body >
        
        <h3 >Login</h3>
-        
+        <p>{{Session::get('success')}}</p>
 			<form action="{{url('post-login')}}" method="POST">
                 {{ csrf_field() }}
                 <div >
