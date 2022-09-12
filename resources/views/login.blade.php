@@ -75,7 +75,7 @@
 					<label  for="rememberPasswordCheck">Remember password</label>
 				</div>
                 <div >
-					<a  href="#">Forgot Password?</a>
+					<a  href="forget-password">Forgot Password?</a>
 					<button class="login"  type="submit">Login</button>
 				</div>
                 <div ><a href="{{url('register')}}">Need an account? Sign up!</a>
